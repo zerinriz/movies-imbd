@@ -29,10 +29,3 @@ export const setMovieDetail = (item) => {
     payload: item,
   };
 };
-
-export const setMovieID = (item) => {
-  return {
-    type: "MOVIE_ID",
-    payload: item,
-  };
-};
