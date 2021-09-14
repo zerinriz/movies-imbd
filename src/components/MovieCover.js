@@ -2,10 +2,12 @@ import React from "react";
 import { Card, Image } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovieDetail, setDetails } from "../actions";
+import Missing from "./Missing.png";
 
-function MovieCover({ cover, title, item }) {
+function MovieCover({ title, item }) {
   const showDetailScreen = useSelector((state) => state.showDetailScreen);
   const dispatch = useDispatch();
+
 
   const onSubmit = () => {
     dispatch(setMovieDetail(item));
@@ -14,18 +16,33 @@ function MovieCover({ cover, title, item }) {
     }
   };
 
-  return (
-    <Card
-      onClick={onSubmit}
-      fluid
-      centered
-      color="blue"
-      style={{ marginTop: 30 }}
-    >
-      <Image src={cover} fluid />
-      <Card.Header textAlign="center">{title}</Card.Header>
-    </Card>
-  );
+  if (item.i === undefined) {
+    return (
+      <Card
+        onClick={onSubmit}
+        fluid
+        centered
+        color="blue"
+        style={{ marginTop: 30 }}
+      >
+        <Image src={Missing} fluid />
+        <Card.Header textAlign="center">{title}</Card.Header>
+      </Card>
+    );
+  } else {
+    return (
+      <Card
+        onClick={onSubmit}
+        fluid
+        centered
+        color="blue"
+        style={{ marginTop: 30 }}
+      >
+        <Image src={item.i.imageUrl} fluid />
+        <Card.Header textAlign="center">{title}</Card.Header>
+      </Card>
+    );
+  }
 }
 
 export default MovieCover;
